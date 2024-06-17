@@ -96,6 +96,7 @@ void plat_rockchip_gic_pcpu_init(void);
 
 void plat_rockchip_pmu_init(void);
 void plat_rockchip_soc_init(void);
+void plat_rockchip_board_init(void);
 uintptr_t plat_get_sec_entrypoint(void);
 
 void platform_cpu_warmboot(void);

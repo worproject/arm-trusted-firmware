@@ -83,6 +83,10 @@ void bl31_platform_setup(void)
 	plat_rockchip_gic_driver_init();
 	plat_rockchip_gic_init();
 	plat_rockchip_pmu_init();
+
+#ifdef BOARD
+	plat_rockchip_board_init();
+#endif
 }
 
 /*******************************************************************************

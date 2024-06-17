@@ -117,6 +117,8 @@
 #define NSTIMER1_BASE		0xfeae8000
 #define WDT_NS_BASE		0xfeaf0000
 
+#define SPI2_BASE		0xfeb20000
+
 #define UART1_BASE		0xfeb40000
 #define UART2_BASE		0xfeb50000
 #define UART3_BASE		0xfeb60000

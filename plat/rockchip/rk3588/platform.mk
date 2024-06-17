@@ -4,8 +4,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
+SOC			:=	rk3588
 RK_PLAT			:=	plat/rockchip
-RK_PLAT_SOC		:=	${RK_PLAT}/${PLAT}
+RK_PLAT_SOC		:=	${RK_PLAT}/${SOC}
 RK_PLAT_COMMON		:=	${RK_PLAT}/common
 
 DISABLE_BIN_GENERATION	:=	1
@@ -19,7 +20,7 @@ GICV3_SUPPORT_GIC600   	:=      1
 # Include GICv3 driver files
 include drivers/arm/gic/v3/gicv3.mk
 
-PLAT_INCLUDES		:=	-Iinclude/plat/common				\
+PLAT_INCLUDES		+=	-Iinclude/plat/common				\
 				-Idrivers/arm/gic/v3/				\
 				-Idrivers/scmi-msg/				\
 				-I${RK_PLAT_COMMON}/				\
