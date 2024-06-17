@@ -15,6 +15,7 @@
 #include "clock.h"
 #include "power_domain.h"
 #include "reset_domain.h"
+#include "voltage_domain.h"
 #include "sensor.h"
 
 #define SCMI_VERSION			0x20000U
@@ -118,6 +119,13 @@ scmi_msg_handler_t scmi_msg_get_rstd_handler(struct scmi_msg *msg);
  * Return a function handler for the message or NULL
  */
 scmi_msg_handler_t scmi_msg_get_pd_handler(struct scmi_msg *msg);
+
+/*
+ * scmi_msg_get_voltd_handler - Return a handler for a voltage domain message
+ * @msg - message to process
+ * Return a function handler for the message or NULL
+ */
+scmi_msg_handler_t scmi_msg_get_voltd_handler(struct scmi_msg *msg);
 
 /*
  * scmi_msg_get_sensor_handler - Return a handler for a sensor message

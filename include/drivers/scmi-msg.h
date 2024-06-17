@@ -206,4 +206,116 @@ int32_t plat_scmi_rstd_autonomous(unsigned int agent_id, unsigned int scmi_id,
 int32_t plat_scmi_rstd_set_state(unsigned int agent_id, unsigned int scmi_id,
 				 bool assert_not_deassert);
 
+/* Handlers for SCMI Voltage Domain protocol services */
+
+/*
+ * Return number of voltage domains for the agent
+ * @agent_id: SCMI agent ID
+ * Return number of voltage domains
+ */
+size_t plat_scmi_voltd_count(unsigned int agent_id);
+
+/*
+ * Get voltage domain string ID (aka name)
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * Return pointer to name or NULL
+ */
+const char *plat_scmi_voltd_get_name(unsigned int agent_id,
+				     unsigned int domain_id);
+
+/*
+ * Get possible voltages as an array of levels in microvolts
+ *
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * @levels: If NULL, function returns, else output levels array
+ * @nb_elts: Array size of @levels.
+ * @start_idx: Start index of levels array
+ * Return an SCMI compliant error code
+ */
+int32_t plat_scmi_voltd_levels_array(unsigned int agent_id,
+				     unsigned int scmi_id,
+				     int *levels,
+				     size_t *nb_elts,
+				     uint32_t start_idx);
+
+/*
+ * Get possible voltages as range with regular steps in microvolts
+ *
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * @steps: 3 cell array for min, max and step level data
+ * Return an SCMI compliant error code
+ */
+int32_t plat_scmi_voltd_levels_by_step(unsigned int agent_id,
+				       unsigned int scmi_id,
+				       int *steps);
+
+/*
+ * Set voltage domain state (enabled or disabled)
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * @enable: Target domain state
+ * Return an SCMI compliant error code
+ */
+int32_t plat_scmi_voltd_set_state(unsigned int agent_id,
+				  unsigned int domain_id,
+				  bool enable);
+
+/*
+ * Get voltage domain state (enabled or disabled)
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * @enable: Domain state
+ * Return an SCMI compliant error code
+ */
+int32_t plat_scmi_voltd_get_state(unsigned int agent_id,
+				  unsigned int domain_id,
+				  bool *enable);
+
+/*
+ * Set voltage domain state (implementation defined)
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * @state: Target custom domain state
+ * Return an SCMI compliant error code
+ */
+int32_t plat_scmi_voltd_set_state_custom(unsigned int agent_id,
+					 unsigned int domain_id,
+					 uint8_t state);
+
+/*
+ * Get voltage domain state (implementation defined)
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * @state: Custom domain state
+ * Return an SCMI compliant error code
+ */
+int32_t plat_scmi_voltd_get_state_custom(unsigned int agent_id,
+					 unsigned int domain_id,
+					 uint8_t *state);
+
+/*
+ * Set voltage domain level in microvolts
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * @level: Target voltage level in microvolts
+ * Return a compliant SCMI error code
+ */
+int32_t plat_scmi_voltd_set_level(unsigned int agent_id,
+				  unsigned int domain_id,
+				  int level);
+
+/*
+ * Get voltage domain level in microvolts
+ * @agent_id: SCMI agent ID
+ * @scmi_id: SCMI voltage domain ID
+ * @level: Voltage level in microvolts
+ * Return a compliant SCMI error code
+ */
+int32_t plat_scmi_voltd_get_level(unsigned int agent_id,
+				  unsigned int domain_id,
+				  int *level);
+
 #endif /* SCMI_MSG_H */
