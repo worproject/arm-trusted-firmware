@@ -106,6 +106,9 @@
 #define DDRPHY2_BASE		0xfe0e0000
 #define DDRPHY3_BASE		0xfe0f0000
 #define TIMER_DDR_BASE		0xfe118000
+#define SDMMC_BASE		0xfe2c0000
+#define SDIO_BASE		0xfe2d0000
+#define EMMC_BASE		0xfe2e0000
 #define KEYLADDER_BASE		0xfe380000
 #define CRYPTO_S_BASE		0xfe390000
 #define OTP_S_BASE		0xfe3a0000

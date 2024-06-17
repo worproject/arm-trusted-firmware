@@ -74,6 +74,7 @@ BL31_SOURCES		+=	${RK_GIC_SOURCES}				\
 				${RK_PLAT_COMMON}/scmi/scmi_clock.c		\
 				${RK_PLAT_COMMON}/scmi/scmi_rstd.c		\
 				${RK_PLAT_SOC}/plat_sip_calls.c         	\
+				${RK_PLAT_SOC}/plat_sip_sdmmc.c         	\
 				${RK_PLAT_SOC}/drivers/secure/secure.c		\
 				${RK_PLAT_SOC}/drivers/soc/soc.c		\
 				${RK_PLAT_SOC}/drivers/pmu/pmu.c		\
