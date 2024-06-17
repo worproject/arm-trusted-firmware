@@ -132,6 +132,7 @@
 #define GPIO3_BASE		0xfec40000
 #define GPIO4_BASE		0xfec50000
 
+#define MAILBOX0_BASE		0xfec60000
 #define MAILBOX1_BASE		0xfec70000
 #define OTP_NS_BASE		0xfecc0000
 #define INTMUX0_DDR_BASE	0Xfecf8000
@@ -190,7 +191,7 @@
 #define PLAT_GICITS1_BASE		0xfe660000
 
 /******************************************************************************
- * sgi, ppi
+ * sgi, ppi, spi
  ******************************************************************************/
 #define RK_IRQ_SEC_SGI_0		8
 #define RK_IRQ_SEC_SGI_1		9
@@ -201,6 +202,7 @@
 #define RK_IRQ_SEC_SGI_6		14
 #define RK_IRQ_SEC_SGI_7		15
 #define RK_IRQ_SEC_PHY_TIMER		29
+#define RK_IRQ_MAILBOX0_AP0		93
 
 /*
  * Define a list of Group 1 Secure and Group 0 interrupts as per GICv3
@@ -214,6 +216,8 @@
 
 #define PLAT_RK_GICV3_G0_IRQS						\
 	INTR_PROP_DESC(RK_IRQ_SEC_SGI_6, GIC_HIGHEST_SEC_PRIORITY,	\
+		       INTR_GROUP0, GIC_INTR_CFG_LEVEL),		\
+	INTR_PROP_DESC(RK_IRQ_MAILBOX0_AP0, GIC_HIGHEST_SEC_PRIORITY,	\
 		       INTR_GROUP0, GIC_INTR_CFG_LEVEL)
 
 /******************************************************************************

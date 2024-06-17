@@ -195,4 +195,17 @@ enum pvtm_con0 {
 
 #define DDR_CHN_CNT			4
 
+/* Mailbox */
+#define MAILBOX_A2B_INTEN		0x00
+#define MAILBOX_A2B_STATUS		0x04
+#define MAILBOX_A2B_CMD(i)		(0x08 + (i) * 8)
+#define MAILBOX_A2B_DAT(i)		(0x0c + (i) * 8)
+
+#define MAILBOX_B2A_INTEN		0x28
+#define MAILBOX_B2A_STATUS		0x2C
+#define MAILBOX_B2A_CMD(i)		(0x30 + (i) * 8)
+#define MAILBOX_B2A_DAT(i)		(0x34 + (i) * 8)
+
+#define MAILBOX_CHANNEL_CNT		4
+
 #endif /* __SOC_H__ */
