@@ -25,6 +25,7 @@ const uint8_t rockchip_scmi_protocol_table[1][MAX_PROTOCOL_IN_LIST] = {
 	{
 		SCMI_PROTOCOL_ID_CLOCK,
 		SCMI_PROTOCOL_ID_RESET_DOMAIN,
+		SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN,
 		0
 	}
 };
