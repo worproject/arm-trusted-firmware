@@ -49,6 +49,7 @@
 #define SCMI_OTP_PHY			37
 #define SCMI_OTPC_AUTO_RD		38
 #define SCMI_OTPC_ARB			39
+#define SCMI_CCLK_EMMC			40
 
 /******** DSUCRU **************************************/
 #define DSUCRU_CLKSEL_CON(n)		(0x0300 + (n) * 4)

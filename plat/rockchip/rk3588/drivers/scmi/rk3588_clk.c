@@ -283,6 +283,10 @@ static unsigned long rk3588_sdmmc_rates[] = {
 	300000000, 400000000, 600000000, 700000000
 };
 
+static unsigned long rk3588_emmc_rates[] = {
+	400000, 24000000, 50000000, 100000000, 150000000, 200000000
+};
+
 static struct sys_clk_info_t sys_clk_info;
 static int clk_scmi_dsu_set_rate(rk_scmi_clock_t *clock, unsigned long rate);
 
@@ -2109,6 +2113,30 @@ static int clk_scmi_otpc_arb_set_status(rk_scmi_clock_t *clock, bool status)
 	return 0;
 }
 
+static int clk_scmi_cclk_emmc_set_rate(rk_scmi_clock_t *clock, unsigned long rate)
+{
+	int div;
+
+	if ((OSC_HZ % rate) == 0) {
+		div = DIV_ROUND_UP(OSC_HZ, rate);
+		mmio_write_32(CRU_BASE + CRU_CLKSEL_CON(77),
+			      CLKDIV_6BITS_SHF(div - 1, 8) |
+			      BITS_WITH_WMASK(2U, 0x3U, 14));
+	} else if ((CPLL_RATE % rate) == 0) {
+		div = DIV_ROUND_UP(CPLL_RATE, rate);
+		mmio_write_32(CRU_BASE + CRU_CLKSEL_CON(77),
+			      CLKDIV_6BITS_SHF(div - 1, 8) |
+			      BITS_WITH_WMASK(1U, 0x3U, 14));
+	} else {
+		div = DIV_ROUND_UP(GPLL_RATE, rate);
+		mmio_write_32(CRU_BASE + CRU_CLKSEL_CON(77),
+			      CLKDIV_6BITS_SHF(div - 1, 8) |
+			      BITS_WITH_WMASK(0U, 0x3U, 14));
+	}
+
+	return 0;
+}
+
 static const struct rk_clk_ops clk_scmi_cpul_ops = {
 	.get_rate = clk_scmi_cpul_get_rate,
 	.set_rate = clk_scmi_cpul_set_rate,
@@ -2337,6 +2365,10 @@ static const struct rk_clk_ops clk_scmi_otpc_arb_ops = {
 	.set_status = clk_scmi_otpc_arb_set_status,
 };
 
+static const struct rk_clk_ops clk_scmi_cclk_emmc_ops = {
+	.set_rate = clk_scmi_cclk_emmc_set_rate,
+};
+
 rk_scmi_clock_t clock_table[] = {
 	RK3588_SCMI_CLOCK(SCMI_CLK_CPUL, "scmi_clk_cpul", &clk_scmi_cpul_ops, rk3588_cpul_rates, ARRAY_SIZE(rk3588_cpul_rates), false),
 	RK3588_SCMI_CLOCK(SCMI_CLK_DSU, "scmi_clk_dsu", &clk_scmi_dsu_ops, rk3588_cpul_rates, ARRAY_SIZE(rk3588_cpul_rates), false),
@@ -2378,6 +2410,7 @@ rk_scmi_clock_t clock_table[] = {
 	RK3588_SCMI_CLOCK(SCMI_OTP_PHY, "scmi_otp_phy", &clk_scmi_otp_phy_ops, NULL, 0, false),
 	RK3588_SCMI_CLOCK(SCMI_OTPC_AUTO_RD, "scmi_otpc_rd", &clk_scmi_otpc_rd_ops, NULL, 0, false),
 	RK3588_SCMI_CLOCK(SCMI_OTPC_ARB, "scmi_otpc_arb", &clk_scmi_otpc_arb_ops, NULL, 0, false),
+	RK3588_SCMI_CLOCK(SCMI_CCLK_EMMC, "scmi_cclk_emmc", &clk_scmi_cclk_emmc_ops, rk3588_emmc_rates, ARRAY_SIZE(rk3588_emmc_rates), false),
 };
 
 size_t rockchip_scmi_clock_count(unsigned int agent_id __unused)
