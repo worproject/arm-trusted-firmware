@@ -75,6 +75,7 @@ BL31_SOURCES		+=	${RK_GIC_SOURCES}				\
 				${RK_PLAT_COMMON}/scmi/scmi_rstd.c		\
 				${RK_PLAT_SOC}/plat_sip_calls.c         	\
 				${RK_PLAT_SOC}/plat_sip_sdmmc.c         	\
+				${RK_PLAT_SOC}/rk3588_trng.c			\
 				${RK_PLAT_SOC}/drivers/secure/secure.c		\
 				${RK_PLAT_SOC}/drivers/soc/soc.c		\
 				${RK_PLAT_SOC}/drivers/pmu/pmu.c		\
@@ -95,6 +96,8 @@ HW_ASSISTED_COHERENCY	:=	1
 USE_COHERENT_MEM	:=	0
 
 ENABLE_SPE_FOR_LOWER_ELS	:= 0
+
+TRNG_SUPPORT		:=	1
 
 $(eval $(call add_define,PLAT_EXTRA_LD_SCRIPT))
 $(eval $(call add_define,PLAT_RK_CPU_RESET_EARLY))
